@@ -2,6 +2,7 @@ package com.kainos.service;
 
 import net.webservicex.Country;
 import net.webservicex.CountrySoap;
+import org.javatuples.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -24,13 +25,13 @@ public class GetCurrencyTask {
         this.country = country;
     }
 
-    public String getCurrency() {
+    public Pair<String, String> getCurrency() {
 
         System.out.println("time now is " + System.currentTimeMillis());
+
         Country countryClient = new Country();
         CountrySoap client = countryClient.getCountrySoap();
         String xmlResult = client.getCurrencyByCountry(country);
-
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
         try {
@@ -39,13 +40,11 @@ public class GetCurrencyTask {
             XPath xpath = XPathFactory.newInstance().newXPath();
             String expression = "(/NewDataSet/Table/CurrencyCode)[1]";
             NodeList list = (NodeList) xpath.compile(expression).evaluate(document, XPathConstants.NODESET);
-            return list.item(0).getFirstChild().getNodeValue();
+            return Pair.with(country, list.item(0).getFirstChild().getNodeValue());
 
         } catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException e) {
             e.printStackTrace();
         }
-
-        return "got nothing!";
-
+        return Pair.with("", "");
     }
 }
