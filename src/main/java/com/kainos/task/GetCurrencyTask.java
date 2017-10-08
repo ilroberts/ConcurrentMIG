@@ -1,4 +1,4 @@
-package com.kainos.service;
+package com.kainos.task;
 
 import net.webservicex.Country;
 import net.webservicex.CountrySoap;
@@ -25,7 +25,7 @@ public class GetCurrencyTask {
         this.country = country;
     }
 
-    public Pair<String, String> getCurrency() {
+    public Pair<String, String> execute() {
 
         System.out.printf("Thread name is %s time now is %d%n", Thread.currentThread().getName(), System.currentTimeMillis());
 

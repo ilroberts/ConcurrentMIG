@@ -5,6 +5,7 @@ import com.kainos.api.Countries;
 import com.kainos.service.CountryService;
 import org.javatuples.Pair;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,6 +17,9 @@ import java.util.List;
 @Path("/countries")
 @Produces(MediaType.APPLICATION_JSON)
 public class CountryResource {
+
+    @Inject
+    private CountryService countryService;
 
     @GET
     @Timed
@@ -32,7 +36,6 @@ public class CountryResource {
     @Path("/add")
     public void postCountries(Countries countries) {
 
-        CountryService countryService = new CountryService();
         List<Pair<String, String>> result = countryService.getCurrencies(countries.getCountries());
         result.forEach(r -> System.out.println("country: " + r.getValue0() + " currency code: " + r.getValue1()));
     }
