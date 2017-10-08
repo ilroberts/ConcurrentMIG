@@ -2,6 +2,8 @@ package com.kainos.resource;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kainos.api.Countries;
+import com.kainos.service.CountryService;
+import org.javatuples.Pair;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,19 +22,19 @@ public class CountryResource {
     public Countries getCountries() {
 
         Countries countries = new Countries();
-        List<String> countryList = Arrays.asList("United Kingdom", "Sudan");
+        List<String> countryList = Arrays.asList("United Kingdom", "Canada", "New Zealand", "Vietnam", "Sudan");
         countries.setCountries(countryList);
-
         return countries;
     }
 
     @POST
     @Timed
     @Path("/add")
-    public Countries postCountries(Countries countries) {
+    public void postCountries(Countries countries) {
 
-
-        return new Countries();
+        CountryService countryService = new CountryService();
+        List<Pair<String, String>> result = countryService.getCurrencies(countries.getCountries());
+        result.forEach(r -> System.out.println("country: " + r.getValue0() + " currency code: " + r.getValue1()));
     }
 
 

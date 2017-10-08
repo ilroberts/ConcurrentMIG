@@ -2,7 +2,6 @@ package com.kainos.service;
 
 import org.javatuples.Pair;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -12,9 +11,8 @@ import java.util.stream.Collectors;
 
 public class CountryService {
 
-    public static void main(String... args) {
+    public List<Pair<String, String>> getCurrencies(List<String> countries) {
 
-        List<String> countries = Arrays.asList("United Kingdom", "Canada", "New Zealand", "Vietnam", "Sudan");
         ExecutorService executor = Executors.newFixedThreadPool(countries.size());
 
         List<GetCurrencyTask> tasks = countries.stream().map(GetCurrencyTask::new).collect(Collectors.toList());
@@ -24,7 +22,6 @@ public class CountryService {
         List<Pair<String, String>> result = futures.stream().map(CompletableFuture::join)
                 .collect(Collectors.toList());
 
-        result.forEach(r -> System.out.println("country: " + r.getValue0() + " currency code: " + r.getValue1()));
         executor.shutdown();
 
         try {
@@ -32,5 +29,6 @@ public class CountryService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return result;
     }
 }

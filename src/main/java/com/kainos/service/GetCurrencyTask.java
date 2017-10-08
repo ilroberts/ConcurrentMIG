@@ -27,7 +27,7 @@ public class GetCurrencyTask {
 
     public Pair<String, String> getCurrency() {
 
-        System.out.println("time now is " + System.currentTimeMillis());
+        System.out.printf("Thread name is %s time now is %d%n", Thread.currentThread().getName(), System.currentTimeMillis());
 
         Country countryClient = new Country();
         CountrySoap client = countryClient.getCountrySoap();
