@@ -3,6 +3,7 @@ package com.kainos.resource;
 import com.codahale.metrics.annotation.Timed;
 import com.kainos.api.Countries;
 import com.kainos.api.CountryCurrencyCode;
+import com.kainos.cache.CurrencyDescriptionCache;
 import com.kainos.service.CountryService;
 import org.javatuples.Pair;
 
@@ -14,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Path("/countries")
@@ -22,6 +24,9 @@ public class CountryResource {
 
     @Inject
     private CountryService countryService;
+
+    @Inject
+    CurrencyDescriptionCache codeDescriptionCache;
 
     @GET
     @Timed
@@ -40,11 +45,10 @@ public class CountryResource {
 
         List<Pair<String, String>> result = countryService.getCurrencies(countries.getCountries());
         result.forEach(r -> System.out.println("country: " + r.getValue0() + " currency code: " + r.getValue1()));
+        List<Optional<String>> descriptions = result.stream().map(r -> codeDescriptionCache.get(r.getValue1())).collect(Collectors.toList());
 
         return result.stream()
                 .map(r -> new CountryCurrencyCode(r.getValue0(), r.getValue1()))
                 .collect(Collectors.toList());
     }
-
-
 }

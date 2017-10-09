@@ -10,7 +10,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ConcurrentMIG_main" />
-    <orderEntry type="library" name="Gradle: org.immutables:value:2.5.5" level="project" />
     <orderEntry type="library" name="Gradle: org.javatuples:javatuples:1.2" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-core:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: com.hubspot.dropwizard:dropwizard-guice:1.0.6.0" level="project" />
