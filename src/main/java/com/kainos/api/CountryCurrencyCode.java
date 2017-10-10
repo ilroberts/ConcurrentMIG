@@ -9,14 +9,21 @@ public class CountryCurrencyCode {
 
     @JsonProperty
     private String currencyCode;
+    @JsonProperty
+    private String currencyCodeDescription;
+
+    public CountryCurrencyCode(String country, String code, String currencyCodeDescription) {
+        this.country = country;
+        this.currencyCode = code;
+        this.currencyCodeDescription = currencyCodeDescription;
+    }
+
+    public void setCurrencyCodeDescription(String currencyCodeDescription) {
+        this.currencyCodeDescription = currencyCodeDescription;
+    }
 
     public String getCountry() {
         return country;
-    }
-
-    public CountryCurrencyCode(String country, String code) {
-        this.country = country;
-        this.currencyCode = code;
     }
 
     public void setCountry(String country) {

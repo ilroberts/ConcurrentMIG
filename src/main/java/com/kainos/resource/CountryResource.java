@@ -15,7 +15,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Path("/countries")
@@ -26,7 +25,7 @@ public class CountryResource {
     private CountryService countryService;
 
     @Inject
-    CurrencyDescriptionCache codeDescriptionCache;
+    private CurrencyDescriptionCache codeDescriptionCache;
 
     @GET
     @Timed
@@ -45,10 +44,9 @@ public class CountryResource {
 
         List<Pair<String, String>> result = countryService.getCurrencies(countries.getCountries());
         result.forEach(r -> System.out.println("country: " + r.getValue0() + " currency code: " + r.getValue1()));
-        List<Optional<String>> descriptions = result.stream().map(r -> codeDescriptionCache.get(r.getValue1())).collect(Collectors.toList());
 
         return result.stream()
-                .map(r -> new CountryCurrencyCode(r.getValue0(), r.getValue1()))
+                .map(r -> new CountryCurrencyCode(r.getValue0(), r.getValue1(), codeDescriptionCache.get(r.getValue1()).orElse("no description")))
                 .collect(Collectors.toList());
     }
 }
