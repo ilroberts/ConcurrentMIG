@@ -54,5 +54,5 @@ Should result in the following being returned:
         "currencyCode": "SDD",
         "currencyCodeDescription": "Sudanese Dollar"
     }
-    ```
 ]
+```
