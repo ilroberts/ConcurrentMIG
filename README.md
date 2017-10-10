@@ -1,4 +1,5 @@
 # ConcurrentMIG
+[![Build Status](https://travis-ci.org/ilroberts/ConcurrentMIG.png?branch=master)](https://travis-ci.org/ilroberts/ConcurrentMIG)
 
 A demo project that serves as a proof of concept to validate concurrent calls to a [CXF](http://cxf.apache.org/) 
 provided SOAP endpoint from a [dropwizard](http://www.dropwizard.io/1.2.0/docs/) web service.
