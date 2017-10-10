@@ -14,6 +14,7 @@
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-core:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: com.hubspot.dropwizard:dropwizard-guice:1.0.6.0" level="project" />
     <orderEntry type="library" name="Gradle: com.h2database:h2:1.4.196" level="project" />
+    <orderEntry type="library" name="Gradle: io.vavr:vavr:0.9.0" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-util:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-jackson:1.2.0" level="project" />
@@ -40,6 +41,7 @@
     <orderEntry type="library" name="Gradle: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Gradle: javax.ws.rs:javax.ws.rs-api:2.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: io.vavr:vavr-match:0.9.0" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.inject.extensions:guice-multibindings:4.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squarespace.jersey2-guice:0-jersey2-guice-spi:1.0.6" level="project" />

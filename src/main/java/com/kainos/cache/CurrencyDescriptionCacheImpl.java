@@ -32,12 +32,7 @@ public class CurrencyDescriptionCacheImpl implements CurrencyDescriptionCache {
             return Optional.empty();
         }
         List<Pair<String, String>> actualCache = cache.get();
-
         Optional<Pair<String, String>> result = actualCache.stream().filter(p -> p.getValue0().equals(key)).findFirst();
-        if (result.isPresent()) {
-            return Optional.of(result.get().getValue1());
-        } else {
-            return Optional.empty();
-        }
+        return result.map(Pair::getValue1);
     }
 }
