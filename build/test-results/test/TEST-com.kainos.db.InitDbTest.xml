@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.kainos.db.InitDbTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-10-10T11:21:19" hostname="fortuna.local" time="0.195">
+  <properties/>
+  <testcase name="testInitDb" classname="com.kainos.db.InitDbTest" time="0.195"/>
+  <system-out><![CDATA[code: GBP description: Pound Sterling
+code: CAD description: Canadian Dollar
+code: NZD description: New Zealand Dollar
+code: VND description: Vietnamese Dong
+code: SDD description: Sudanese Dollar
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

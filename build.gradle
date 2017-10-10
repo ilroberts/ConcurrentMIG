@@ -7,7 +7,8 @@ apply plugin: 'no.nils.wsdl2java'
 
 sourceCompatibility = 1.8
 
-mainClassName="com.kainos.service.CountryService"
+mainClassName="com.kainos.MIGApplication"
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 buildscript {
 
@@ -41,4 +42,9 @@ wsdl2java {
     generatedWsdlDir = file("generated")  // target directory for generated source coude
     wsdlDir = file("src/main/resources/wsdl") // define to support incremental build
     wsdlsToGenerate = [['src/main/resources/wsdl/sample.wsdl']]
+}
+
+// Configure the run task to start the Dropwizard service
+run {
+    args 'server', './src/main/resources/config.yml'
 }
