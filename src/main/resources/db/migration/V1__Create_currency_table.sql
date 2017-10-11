@@ -1,0 +1,1 @@
+CREATE TABLE CURRENCY_CODE(code varchar(10) primary key, description varchar(255));
