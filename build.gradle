@@ -7,6 +7,8 @@ buildscript {
     }
     dependencies {
         classpath 'no.nils:wsdl2java:0.10'
+        classpath 'org.jooq:jooq-codegen:3.10.0'
+        classpath 'com.h2database:h2:1.4.196'
     }
 }
 
@@ -59,3 +61,41 @@ flyway {
     url = 'jdbc:h2:file:./currencydb'
     user = 'sa'
 }
+
+// Use your favourite XML builder to construct the code generation configuration file
+// ----------------------------------------------------------------------------------
+def writer = new StringWriter()
+def xml = new groovy.xml.MarkupBuilder(writer)
+        .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd') {
+    jdbc() {
+        driver('org.h2.Driver')
+        url('jdbc:h2:./currencydb')
+        user('sa')
+        password('')
+    }
+
+    generator() {
+        database() {
+            inputSchema('CURRENCY_SCHEMA')
+        }
+
+        // Watch out for this caveat when using MarkupBuilder with "reserved names"
+        // - https://github.com/jOOQ/jOOQ/issues/4797
+        // - http://stackoverflow.com/a/11389034/521799
+        // - https://groups.google.com/forum/#!topic/jooq-user/wi4S9rRxk4A
+        generate([:]) {
+            pojos true
+            daos true
+        }
+        target() {
+            packageName('com.kainos.db')
+            directory('./generated')
+        }
+    }
+}
+
+// Run the code generator
+// ----------------------
+org.jooq.util.GenerationTool.generate(
+        javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
+)
