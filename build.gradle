@@ -126,6 +126,7 @@ jooq {
                 records = true
                 immutablePojos = true
                 fluentSetters = true
+                daos = true
             }
             target {
                 packageName = 'com.kainos.db'
