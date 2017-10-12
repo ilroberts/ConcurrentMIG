@@ -8,7 +8,6 @@ buildscript {
     dependencies {
         classpath 'no.nils:wsdl2java:0.10'
         classpath 'org.jooq:jooq-codegen:3.10.0'
-        classpath 'com.h2database:h2:1.4.196'
     }
 }
 
@@ -17,6 +16,7 @@ plugins {
     id "application"
     id "no.nils.wsdl2java" version "0.10"
     id "org.flywaydb.flyway" version "4.2.0"
+    id 'nu.studer.jooq' version '2.0.7'
 }
 
 group 'com.kainos'
@@ -38,10 +38,13 @@ dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: '1.2.0'
     // https://mvnrepository.com/artifact/com.hubspot.dropwizard/dropwizard-guice
     compile group: 'com.hubspot.dropwizard', name: 'dropwizard-guice', version: '1.0.6.0'
-    // https://mvnrepository.com/artifact/com.h2database/h2
-    compile group: 'com.h2database', name: 'h2', version: '1.4.196'
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
     // https://mvnrepository.com/artifact/org.jooq/jooq
     compile group: 'org.jooq', name: 'jooq', version: '3.10.0'
+
+    jooqRuntime 'postgresql:postgresql:9.1-901.jdbc4'
+    compile 'org.jooq:jooq'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
@@ -58,44 +61,76 @@ run {
 }
 
 flyway {
-    url = 'jdbc:h2:file:./currencydb'
-    user = 'sa'
+    url = 'jdbc:postgresql://localhost:32768/currencydb'
+    user = 'postgres'
 }
 
-// Use your favourite XML builder to construct the code generation configuration file
-// ----------------------------------------------------------------------------------
-def writer = new StringWriter()
-def xml = new groovy.xml.MarkupBuilder(writer)
-        .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd') {
-    jdbc() {
-        driver('org.h2.Driver')
-        url('jdbc:h2:./currencydb')
-        user('sa')
-        password('')
-    }
+//// Use your favourite XML builder to construct the code generation configuration file
+//// ----------------------------------------------------------------------------------
+//def writer = new StringWriter()
+//def xml = new groovy.xml.MarkupBuilder(writer)
+//        .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd') {
+//    jdbc() {
+//        driver('org.postgresql.Driver:42.1.4')
+//        url('jdbc:postgresql://localhost:32768/currencydb')
+//    }
+//
+//    generator() {
+//        database() {
+//            inputSchema('CURRENCY_SCHEMA')
+//        }
+//
+//        // Watch out for this caveat when using MarkupBuilder with "reserved names"
+//        // - https://github.com/jOOQ/jOOQ/issues/4797
+//        // - http://stackoverflow.com/a/11389034/521799
+//        // - https://groups.google.com/forum/#!topic/jooq-user/wi4S9rRxk4A
+//        generate([:]) {
+//            pojos true
+//            daos true
+//        }
+//        target() {
+//            packageName('com.kainos.db')
+//            directory('./generated')
+//        }
+//    }
+//}
+//
+//// Run the code generator
+//// ----------------------
+//org.jooq.util.GenerationTool.generate(
+//        javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class))
 
-    generator() {
-        database() {
-            inputSchema('CURRENCY_SCHEMA')
+jooq {
+    version = '3.9.5'
+    edition = 'OSS'
+    currency(sourceSets.main) {
+        jdbc {
+            driver = 'org.postgresql.Driver'
+            url = 'jdbc:postgresql://localhost:32768/currencydb'
+            user = 'postgres'
+            password = ''
         }
-
-        // Watch out for this caveat when using MarkupBuilder with "reserved names"
-        // - https://github.com/jOOQ/jOOQ/issues/4797
-        // - http://stackoverflow.com/a/11389034/521799
-        // - https://groups.google.com/forum/#!topic/jooq-user/wi4S9rRxk4A
-        generate([:]) {
-            pojos true
-            daos true
-        }
-        target() {
-            packageName('com.kainos.db')
-            directory('./generated')
+        generator {
+            name = 'org.jooq.util.DefaultGenerator'
+            strategy {
+                name = 'org.jooq.util.DefaultGeneratorStrategy'
+                // ...
+            }
+            database {
+                name = 'org.jooq.util.postgres.PostgresDatabase'
+                inputSchema = 'currency_schema'
+            }
+            generate {
+                relations = true
+                deprecated = false
+                records = true
+                immutablePojos = true
+                fluentSetters = true
+            }
+            target {
+                packageName = 'com.kainos.db'
+                directory = 'generated'
+            }
         }
     }
 }
-
-// Run the code generator
-// ----------------------
-org.jooq.util.GenerationTool.generate(
-        javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class)
-)

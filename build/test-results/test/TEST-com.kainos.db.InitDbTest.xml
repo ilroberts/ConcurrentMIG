@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.kainos.db.InitDbTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2017-10-11T14:55:00" hostname="fortuna.local" time="0.0">
+<testsuite name="com.kainos.db.InitDbTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2017-10-12T08:22:34" hostname="fortuna.local" time="0.0">
   <properties/>
   <testcase name="testInitDb" classname="com.kainos.db.InitDbTest" time="0.0">
     <skipped/>
