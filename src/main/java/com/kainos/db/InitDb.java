@@ -1,65 +1,34 @@
 package com.kainos.db;
 
+import com.kainos.db.tables.daos.CurrencyCodeDao;
+import com.kainos.db.tables.pojos.CurrencyCode;
 import org.javatuples.Pair;
+import org.jooq.Configuration;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DefaultConfiguration;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class InitDb {
 
-    private static final String DB_DRIVER = "org.h2.Driver";
-    private static final String DB_CONNECTION = "jdbc:h2:./currencydb;DB_CLOSE_DELAY=-1";
-    private static final String DB_USER = "sa";
-    private static final String DB_PASSWORD = "";
+    public static Optional<Map<String,String>> getCodeDescriptions()  {
 
-    public static void initialize() throws SQLException {
-    }
+        String username = "postgres";
+        String password = "";
+        String url = "jdbc:postgresql://localhost:32768/currencydb";
 
-    public static Optional<List<Pair<String, String>>> getCodeDescriptions() throws SQLException {
+        try (Connection c = DriverManager.getConnection(url, username, password)) {
 
-        Connection connection = getDBConnection();
-        Statement stmt;
-        try {
-            connection.setAutoCommit(false);
-            stmt = connection.createStatement();
-
-            List<Pair<String, String>> results = new ArrayList<>();
-            ResultSet rs = stmt.executeQuery("select * from CURRENCY_CODE");
-            while (rs.next()) {
-                results.add(Pair.with(rs.getString("code"), rs.getString("description")));
-            }
-            stmt.close();
-            connection.commit();
-            return Optional.of(results);
-        } catch (SQLException e) {
-            System.out.println("Exception Message " + e.getLocalizedMessage());
+            Configuration configuration = new DefaultConfiguration().set(c).set(SQLDialect.POSTGRES_9_5);
+            CurrencyCodeDao currencyCodeDao = new CurrencyCodeDao(configuration);
+            return Optional.of(currencyCodeDao.findAll().stream().collect(Collectors.toMap(CurrencyCode::getCode, CurrencyCode::getDescription)));
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
+            return Optional.empty();
         }
-
-        return Optional.empty();
-    }
-
-    public static void teardown() throws SQLException {
-
-    }
-
-    private static Connection getDBConnection() {
-
-        try {
-            Class.forName(DB_DRIVER);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            return DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
     }
 }

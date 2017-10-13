@@ -31,7 +31,24 @@ The following diagram illustrates the sequence of messages passed between JUYI a
 
 ### EMIS vs Vision responses
 
+As can be seen from the diagram above we only need to make one call to EMIS to retrieve the patient record, 
+but we need to make up to 10 calls to Vision to retrieve the same information. This is due to a restriction 
+on the data sets that each organization exposes. In the test environment the call to EMIS to retrieve the ful
+patient record takes 4 seconds, whilst a call to Vision to retrieve a specific data set takes on average 2 seconds.
+This means that accessing the full patient record sequentially will take in the region of 20 seconds.
+
+In an attempt to reduce the overall time taken a multi threaded approach is being considered whereby all of the 
+Vision calls are made concurrently. The [Java 8 concurrency](https://docs.oracle.com/javase/8/docs/technotes/guides/concurrency/changes8.html)
+features will be utilized to implement the required concurrent requests.
+
 ### Concurrent requests
+
+In order to facilitate concurrent requests to the MIG a thread pool will be initialized on application startup.
+The size of the thread pool will be configurable and determined by a parameter retrieved from the database. Each
+call to the MIG and the transformation to FHIR will be carried out by an instance of a transformation task class.
+The output of each transformation will be consolidated and returned to the integration engine as a FHIR bundle.
+
+
 
 ### XML parsing
 
