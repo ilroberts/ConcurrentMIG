@@ -17,6 +17,7 @@
     <orderEntry type="library" name="Gradle: com.hubspot.dropwizard:dropwizard-guice:1.0.6.0" level="project" />
     <orderEntry type="library" name="Gradle: org.postgresql:postgresql:42.1.4" level="project" />
     <orderEntry type="library" name="Gradle: org.jooq:jooq:3.9.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml:aalto-xml:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-util:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-jackson:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-validation:1.2.0" level="project" />
@@ -42,6 +43,7 @@
     <orderEntry type="library" name="Gradle: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" name="Gradle: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Gradle: javax.ws.rs:javax.ws.rs-api:2.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.codehaus.woodstox:stax2-api:4.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.inject.extensions:guice-multibindings:4.0" level="project" />
     <orderEntry type="library" name="Gradle: com.squarespace.jersey2-guice:0-jersey2-guice-spi:1.0.6" level="project" />
     <orderEntry type="library" name="Gradle: aopalliance:aopalliance:1.0" level="project" />

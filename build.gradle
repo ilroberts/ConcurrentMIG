@@ -42,6 +42,8 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
     // https://mvnrepository.com/artifact/org.jooq/jooq
     compile group: 'org.jooq', name: 'jooq', version: '3.10.0'
+    // https://mvnrepository.com/artifact/com.fasterxml/aalto-xml
+    compile group: 'com.fasterxml', name: 'aalto-xml', version: '1.0.0'
 
     jooqRuntime 'postgresql:postgresql:9.1-901.jdbc4'
     compile 'org.jooq:jooq'
@@ -65,40 +67,6 @@ flyway {
     user = 'postgres'
 }
 
-//// Use your favourite XML builder to construct the code generation configuration file
-//// ----------------------------------------------------------------------------------
-//def writer = new StringWriter()
-//def xml = new groovy.xml.MarkupBuilder(writer)
-//        .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd') {
-//    jdbc() {
-//        driver('org.postgresql.Driver:42.1.4')
-//        url('jdbc:postgresql://localhost:32768/currencydb')
-//    }
-//
-//    generator() {
-//        database() {
-//            inputSchema('CURRENCY_SCHEMA')
-//        }
-//
-//        // Watch out for this caveat when using MarkupBuilder with "reserved names"
-//        // - https://github.com/jOOQ/jOOQ/issues/4797
-//        // - http://stackoverflow.com/a/11389034/521799
-//        // - https://groups.google.com/forum/#!topic/jooq-user/wi4S9rRxk4A
-//        generate([:]) {
-//            pojos true
-//            daos true
-//        }
-//        target() {
-//            packageName('com.kainos.db')
-//            directory('./generated')
-//        }
-//    }
-//}
-//
-//// Run the code generator
-//// ----------------------
-//org.jooq.util.GenerationTool.generate(
-//        javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.util.jaxb.Configuration.class))
 
 jooq {
     version = '3.9.5'
