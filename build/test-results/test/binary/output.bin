@@ -1,0 +1,12 @@
+"urn:hgl:patientview:scm:procedure
+%urn:hgl:patientview:scm:riskswarning
+$urn:hgl:patientview:scm:examination
+ urn:hgl:patientview:scm:problem
+&urn:hgl:patientview:scm:investigation
+"urn:hgl:patientview:scm:diagnosis
+ urn:hgl:patientview:scm:summary
+&urn:hgl:patientview:scm:patientdetail
+urn:hgl:patientview:scm:event
+#urn:hgl:patientview:scm:medication
+*urn:hgl:patientdata:eol:check_code_exists
+'urn:hgl:patientview:eol:supportivecare

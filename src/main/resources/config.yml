@@ -1,1 +1,3 @@
-template: Hello, %s!
+cacheScheduleConfiguration:
+  delay: 5
+  period: 5

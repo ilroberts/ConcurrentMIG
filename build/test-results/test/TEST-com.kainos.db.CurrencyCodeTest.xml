@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.kainos.db.CurrencyCodeTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2017-10-17T10:32:57" hostname="fortuna.local" time="0.0">
+  <properties/>
+  <testcase name="testCurrencyCode" classname="com.kainos.db.CurrencyCodeTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

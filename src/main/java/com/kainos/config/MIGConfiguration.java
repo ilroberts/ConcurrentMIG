@@ -1,36 +1,19 @@
 package com.kainos.config;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import de.spinscale.dropwizard.jobs.JobConfiguration;
 import io.dropwizard.Configuration;
-import org.hibernate.validator.constraints.NotEmpty;
 
-public class MIGConfiguration extends Configuration implements JobConfiguration {
+import javax.validation.Valid;
 
-    @NotEmpty
-    private String template;
-    @NotEmpty
-    private String defaultName = "Stranger";
+public class MIGConfiguration extends Configuration  {
 
-    @JsonProperty
-    public String getDefaultName() {
-        return defaultName;
+    @Valid
+    private CacheScheduleConfiguration cacheScheduleConfiguration;
+
+    public CacheScheduleConfiguration getCacheScheduleConfiguration() {
+        return cacheScheduleConfiguration;
     }
 
-    @JsonProperty
-    public void setDefaultName(String defaultName) {
-        this.defaultName = defaultName;
+    public void setCacheScheduleConfiguration(CacheScheduleConfiguration cacheScheduleConfiguration) {
+        this.cacheScheduleConfiguration = cacheScheduleConfiguration;
     }
-
-    @JsonProperty
-    public String getTemplate() {
-        return template;
-    }
-
-    @JsonProperty
-    public void setTemplate(String template) {
-        this.template = template;
-    }
-
-
 }

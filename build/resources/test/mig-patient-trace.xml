@@ -1,0 +1,164 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+      <wsa:To SOAP-ENV:mustUnderstand="1">http://www.w3.org/2005/08/addressing/anonymous</wsa:To>
+      <wsa:Action>http://www.healthcaregateway.co.uk/mig/MiG/MiGResponse</wsa:Action>
+      <wsa:MessageID>FCCA4015-29EC-439E-8A24-22700E1EA088</wsa:MessageID>
+      <wsa:RelatesTo>CB993199-666D-4088-A2F4-01C77015F7BF</wsa:RelatesTo>
+   </SOAP-ENV:Header>
+   <SOAP-ENV:Body>
+      <mig:migResponse xmlns:mig="http://www.healthcaregateway.co.uk/mig">
+         <mig:serviceDefinition>
+            <mig:name>MIG.PATIENT.TRACE.ExtendedPatientTrace</mig:name>
+            <mig:version>0.0.1</mig:version>
+         </mig:serviceDefinition>
+         <mig:serviceContent>
+            <ept:extendedTraceResponse xmlns:ept="http://www.healthcaregateway.co.uk/mig">
+               <ept:id>c7fe1ca1-9f34-4fc7-8cf3-27441a09ca6a</ept:id>
+               <ept:inResponseTo>11111111-57f6-4950-99c0-71a9750da42b</ept:inResponseTo>
+               <ept:patientMatch>
+                  <ept:Patient>
+                     <ept:id>475c17a3-40b4-49ba-bfb5-504a2693b89f</ept:id>
+                     <ept:primaryIdentifier type="NHS">9620344472</ept:primaryIdentifier>
+                     <ept:person>
+                        <ept:name use="Usual">
+                           <ept:title>Miss</ept:title>
+                           <ept:familyName>Morrison</ept:familyName>
+                           <ept:givenName>Dorothy</ept:givenName>
+                           <ept:preferredName>Dorothy</ept:preferredName>
+                        </ept:name>
+                        <ept:gender>Female</ept:gender>
+                     </ept:person>
+                     <ept:birthDate>1971-02-10</ept:birthDate>
+                     <ept:address type="Unstructured" use="Home">
+                        <ept:unstructuredAddress>
+                           <ept:postCode>HD4 7HT</ept:postCode>
+                           <ept:line1>75</ept:line1>
+                           <ept:line2>12 Chester Road</ept:line2>
+                           <ept:line3>Green Side</ept:line3>
+                           <ept:line4>Ilkley</ept:line4>
+                           <ept:line5>West Yorkshire</ept:line5>
+                        </ept:unstructuredAddress>
+                     </ept:address>
+                     <ept:Organisation>
+                        <ept:organisation>
+                           <ept:id>4cd8459d-c2c5-46d5-9057-35697e94cae7</ept:id>
+                           <ept:name>EMISWebCR1 50005</ept:name>
+                           <ept:organisationCode>urn:hgl:addressing:ods:A00005</ept:organisationCode>
+                        </ept:organisation>
+                     </ept:Organisation>
+                  </ept:Patient>
+               </ept:patientMatch>
+               <ept:patientMatch>
+                  <ept:Patient>
+                     <ept:id>475c17a3-40b4-49ba-bfb5-504a2693b89f</ept:id>
+                     <ept:primaryIdentifier type="NHS">9620344472</ept:primaryIdentifier>
+                     <ept:person>
+                        <ept:name use="Usual">
+                           <ept:title>Miss</ept:title>
+                           <ept:familyName>Morrison</ept:familyName>
+                           <ept:givenName>Dorothy</ept:givenName>
+                           <ept:preferredName>Dorothy</ept:preferredName>
+                        </ept:name>
+                        <ept:gender>Female</ept:gender>
+                     </ept:person>
+                     <ept:birthDate>1971-02-10</ept:birthDate>
+                     <ept:address type="Unstructured" use="Home">
+                        <ept:unstructuredAddress>
+                           <ept:postCode>HD4 7HT</ept:postCode>
+                           <ept:line1>75</ept:line1>
+                           <ept:line2>12 Chester Road</ept:line2>
+                           <ept:line3>Green Side</ept:line3>
+                           <ept:line4>Ilkley</ept:line4>
+                           <ept:line5>West Yorkshire</ept:line5>
+                        </ept:unstructuredAddress>
+                     </ept:address>
+                     <ept:Organisation>
+                        <ept:organisation>
+                           <ept:id>5914a7e0-6b8b-4893-aa17-b0bbf1f43e2f</ept:id>
+                           <ept:name>EMISWebCR1 50004</ept:name>
+                           <ept:organisationCode>urn:hgl:addressing:ods:A00004</ept:organisationCode>
+                        </ept:organisation>
+                     </ept:Organisation>
+                  </ept:Patient>
+               </ept:patientMatch>
+               <ept:serviceProfiles>
+                  <ept:name>urn:hgl:patientview:scm:v2</ept:name>
+                  <ept:description>Standard Content Model Views</ept:description>
+                  <ept:displayName>GP View</ept:displayName>
+                  <ept:organisationRef>
+                     <ept:id>4cd8459d-c2c5-46d5-9057-35697e94cae7</ept:id>
+                  </ept:organisationRef>
+                  <ept:values>
+                     <ept:description>SCM Procedure View</ept:description>
+                     <ept:displayName>Procedure</ept:displayName>
+                     <ept:value>urn:hgl:patientview:scm:procedure</ept:value>
+                  </ept:values>
+                  <ept:values>
+                     <ept:description>SCM Risks/Warning View</ept:description>
+                     <ept:displayName>Risks/Warning</ept:displayName>
+                     <ept:value>urn:hgl:patientview:scm:riskswarning</ept:value>
+                  </ept:values>
+                  <ept:values>
+                     <ept:description>SCM Examination View</ept:description>
+                     <ept:displayName>Examination</ept:displayName>
+                     <ept:value>urn:hgl:patientview:scm:examination</ept:value>
+                  </ept:values>
+                  <ept:values>
+                     <ept:description>SCM Problem View</ept:description>
+                     <ept:displayName>Problem</ept:displayName>
+                     <ept:value>urn:hgl:patientview:scm:problem</ept:value>
+                  </ept:values>
+                  <ept:values>
+                     <ept:description>SCM Investigation View</ept:description>
+                     <ept:displayName>Investigation</ept:displayName>
+                     <ept:value>urn:hgl:patientview:scm:investigation</ept:value>
+                  </ept:values>
+                  <ept:values>
+                     <ept:description>SCM Diagnosis View</ept:description>
+                     <ept:displayName>Diagnosis</ept:displayName>
+                     <ept:value>urn:hgl:patientview:scm:diagnosis</ept:value>
+                  </ept:values>
+                  <ept:values>
+                     <ept:description>SCM Summary View</ept:description>
+                     <ept:displayName>Summary</ept:displayName>
+                     <ept:value>urn:hgl:patientview:scm:summary</ept:value>
+                  </ept:values>
+                  <ept:values>
+                     <ept:description>SCM Patient Detail View</ept:description>
+                     <ept:displayName>Patient Details</ept:displayName>
+                     <ept:value>urn:hgl:patientview:scm:patientdetail</ept:value>
+                  </ept:values>
+                  <ept:values>
+                     <ept:description>SCM Event View</ept:description>
+                     <ept:displayName>Event</ept:displayName>
+                     <ept:value>urn:hgl:patientview:scm:event</ept:value>
+                  </ept:values>
+                  <ept:values>
+                     <ept:description>SCM Medication View</ept:description>
+                     <ept:displayName>Medication</ept:displayName>
+                     <ept:value>urn:hgl:patientview:scm:medication</ept:value>
+                  </ept:values>
+               </ept:serviceProfiles>
+               <ept:serviceProfiles>
+                  <ept:name>urn:hgl:patientview:eol:supportivecare:v2</ept:name>
+                  <ept:description>Supportive Care + Trigger Code</ept:description>
+                  <ept:displayName>Supportive Care</ept:displayName>
+                  <ept:organisationRef>
+                     <ept:id>4cd8459d-c2c5-46d5-9057-35697e94cae7</ept:id>
+                  </ept:organisationRef>
+                  <ept:values>
+                     <ept:description>9nG7</ept:description>
+                     <ept:displayName>check_code_exists</ept:displayName>
+                     <ept:value>urn:hgl:patientdata:eol:check_code_exists</ept:value>
+                  </ept:values>
+                  <ept:values>
+                     <ept:description>Supportive Care</ept:description>
+                     <ept:displayName>Supportive Care</ept:displayName>
+                     <ept:value>urn:hgl:patientview:eol:supportivecare</ept:value>
+                  </ept:values>
+               </ept:serviceProfiles>
+            </ept:extendedTraceResponse>
+         </mig:serviceContent>
+      </mig:migResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

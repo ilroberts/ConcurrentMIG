@@ -1,9 +1,6 @@
 package com.kainos.job;
 
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
+import io.dropwizard.lifecycle.Managed;
 
-public interface CacheManager  {
-
-    void doJob(JobExecutionContext e) throws JobExecutionException;
+public interface CacheManager extends Managed {
 }
