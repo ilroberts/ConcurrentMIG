@@ -48,12 +48,37 @@ The size of the thread pool will be configurable and determined by a parameter r
 call to the MIG and the transformation to FHIR will be carried out by an instance of a transformation task class.
 The output of each transformation will be consolidated and returned to the integration engine as a FHIR bundle.
 
-
-
 ### XML parsing
+
+Currently the responses retreived from the MIG are unmarshalled to Java objects using [JAXB](https://en.wikipedia.org/wiki/Java_Architecture_for_XML_Binding). 
+Calls to the MIG endpoint are implemented via an [Apache CXF](http://cxf.apache.org/) client. The transformers convert the XML
+to HIR Json using [Jackson](https://github.com/FasterXML/jackson) libraries that form part of Dropwizard.
+
+Several different mechanisms are available for unmarshalling XML, with different performance charcteristics. 
+The proposed approach is DOM based, which loads the whole XML structure into memory as Java objects. This method is 
+suitable for processing small to medium sized payloads, but may result in performance problems with larger payloads. Should performance
+issues occur the approach will be adjusted to use a Sax based parser, which traverses the structure and processes it section by 
+section.
 
 ### Database lookups
 
-## Summary
+As part of the transformation process reference data lookups will be required. Reference data lookups will be required for:
+* identifying excluded codes(in the region of 2,000 codes)
+* acquiring the required text for repurposed codes (total number not known, but expected to be in the hundreds)
+In order to process the incoming messages as quickly as possible the required reference data will be loaded into suitable cache data structures. 
+The data structures will be populated during application startup. The [JOOQ](https://www.jooq.org/) library is already used within the product to 
+simplify the process of returning data from the database.
+
+#### Scheduled updates
+
+It is anticipated that the existing staging database will be used to store the required reference data. The reference data will be loaded on application startup
+and subsequently updated using a scheduled [Quartz](http://www.quartz-scheduler.org/) task.
 
 ### Technical risks in the solution
+
+* The multithreaded approach required for MIG calls requires careful monitoring and tuning to ensure that the use of too many threads 
+results in excessive context switching and associated loss of performance. The host machines for the service have 2 CPUs and 8 GB or RAM. Load testing of the service is required 
+to validate the performance characteristics of the solution and to establish the number of load balanced virtual machines required to meet the non functional requirement of 
+300 concurrent users.
+* The MIG API requires that a consent to view indicator is included in the request message, together with the name of the user who initiated the call. 
+This approach conflicts with the current Evolve approach of making the data requests while the permission to view screen is being displayed. 

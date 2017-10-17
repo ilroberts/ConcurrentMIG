@@ -1,10 +1,11 @@
 package com.kainos.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import de.spinscale.dropwizard.jobs.JobConfiguration;
 import io.dropwizard.Configuration;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class MIGConfiguration extends Configuration {
+public class MIGConfiguration extends Configuration implements JobConfiguration {
 
     @NotEmpty
     private String template;

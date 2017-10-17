@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-import static com.kainos.db.InitDb.getCodeDescriptions;
-import static com.kainos.db.InitDb.initialize;
-import static com.kainos.db.InitDb.teardown;
+import static com.kainos.db.DatabaseManagerImpl.getCodeDescriptions;
+import static com.kainos.db.DatabaseManagerImpl.initialize;
+import static com.kainos.db.DatabaseManagerImpl.teardown;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class InitDbTest {
+public class DatabaseManagerTest {
 
     @Test
     @Ignore

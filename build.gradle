@@ -44,6 +44,10 @@ dependencies {
     compile group: 'org.jooq', name: 'jooq', version: '3.10.0'
     // https://mvnrepository.com/artifact/com.fasterxml/aalto-xml
     compile group: 'com.fasterxml', name: 'aalto-xml', version: '1.0.0'
+    // https://mvnrepository.com/artifact/de.spinscale.dropwizard/dropwizard-jobs-core
+    compile group: 'de.spinscale.dropwizard', name: 'dropwizard-jobs-core', version: '3.0.0'
+    // https://mvnrepository.com/artifact/de.spinscale.dropwizard/dropwizard-jobs-guice
+    compile group: 'de.spinscale.dropwizard', name: 'dropwizard-jobs-guice', version: '3.0.0'
 
     jooqRuntime 'postgresql:postgresql:9.1-901.jdbc4'
     compile 'org.jooq:jooq'
