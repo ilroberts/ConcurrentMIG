@@ -2,6 +2,7 @@ package com.kainos.job;
 
 import com.kainos.cache.CurrencyDescriptionCache;
 import com.kainos.config.CacheScheduleConfiguration;
+import io.dropwizard.lifecycle.Managed;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -11,7 +12,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 @Singleton
-public final class CacheManagerImpl implements CacheManager {
+public final class CacheManagerImpl implements Managed, CacheManager {
 
     @Inject
     private CurrencyDescriptionCache cache;
@@ -25,7 +26,7 @@ public final class CacheManagerImpl implements CacheManager {
     @Override
     public void start() throws Exception {
         scheduledExecutorService = Executors.newScheduledThreadPool(1);
-        scheduledExecutorService.scheduleAtFixedRate(new CacheUpdater(), configuration.getDelay(), configuration.getPeriod(), TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(new CacheUpdater(), 5, 10, TimeUnit.SECONDS);
     }
 
     @Override

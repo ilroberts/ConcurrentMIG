@@ -5,6 +5,8 @@ import com.kainos.cache.CurrencyDescriptionCache;
 import com.kainos.cache.CurrencyDescriptionCacheImpl;
 import com.kainos.db.DatabaseManager;
 import com.kainos.db.DatabaseManagerImpl;
+import com.kainos.job.CacheManager;
+import com.kainos.job.CacheManagerImpl;
 import com.kainos.service.CountryService;
 import com.kainos.service.CountryServiceImpl;
 
@@ -15,6 +17,7 @@ public class MIGModule extends AbstractModule {
 
         bind(DatabaseManager.class).to(DatabaseManagerImpl.class);
         bind(CurrencyDescriptionCache.class).to(CurrencyDescriptionCacheImpl.class);
+        bind(CacheManager.class).to(CacheManagerImpl.class);
         bind(CountryService.class).to(CountryServiceImpl.class);
     }
 }

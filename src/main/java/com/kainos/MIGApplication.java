@@ -2,6 +2,8 @@ package com.kainos;
 
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.kainos.config.MIGConfiguration;
+import com.kainos.job.CacheManager;
+import com.kainos.job.CacheManagerImpl;
 import com.kainos.resource.CountryResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -23,6 +25,7 @@ public class MIGApplication extends Application<MIGConfiguration> {
                 .addModule(new MIGModule())
                 .setConfigClass(MIGConfiguration.class)
                 .build();
+
         bootstrap.addBundle(guiceBundle);
     }
 
@@ -30,5 +33,6 @@ public class MIGApplication extends Application<MIGConfiguration> {
     public void run(MIGConfiguration configuration, Environment environment) {
 
         environment.jersey().register(new CountryResource());
+        environment.lifecycle().manage(guiceBundle.getInjector().getInstance(CacheManager.class));
     }
 }
