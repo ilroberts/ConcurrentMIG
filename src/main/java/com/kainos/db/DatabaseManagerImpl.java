@@ -2,6 +2,8 @@ package com.kainos.db;
 
 import com.kainos.db.tables.daos.CurrencyCodeDao;
 import com.kainos.db.tables.pojos.CurrencyCode;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.javatuples.Pair;
 import org.jooq.Configuration;
 import org.jooq.SQLDialect;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
 public class DatabaseManagerImpl implements DatabaseManager {
 
     Connection connection;
+    HikariDataSource ds;
 
     private String username = "postgres";
     private String password = "";
@@ -21,8 +24,15 @@ public class DatabaseManagerImpl implements DatabaseManager {
 
     public DatabaseManagerImpl() {
 
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(url);
+        config.setUsername(username);
+        config.setPassword(password);
+
+        ds = new HikariDataSource(config);
+
         try {
-            connection = DriverManager.getConnection(url, username, password);
+            connection = ds.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,9 +46,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
 
         Map<String, String> result =
                 Collections.unmodifiableMap(new LinkedHashMap<>(
-                        currencyCodeDao.findAll().stream().collect(Collectors.toMap(CurrencyCode::getCode, CurrencyCode::getDescription)
-                )));
-
+                        currencyCodeDao.findAll().stream().collect(Collectors.toMap(CurrencyCode::getCode, CurrencyCode::getDescription))));
 
         return Optional.of(result);
     }
