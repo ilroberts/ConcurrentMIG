@@ -1,5 +1,7 @@
 package com.kainos.resource;
 
+import com.codahale.metrics.Meter;
+import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.annotation.Timed;
 import com.kainos.api.Countries;
 import com.kainos.api.CountryCurrencyCode;
@@ -28,10 +30,17 @@ public class CountryResource {
     @Inject
     private CurrencyDescriptionCache codeDescriptionCache;
 
+    private final Meter requests;
+
+    public CountryResource(final MetricRegistry mr) {
+        this.requests = mr.meter("requests");
+    }
+
     @GET
     @Timed
     public Countries getCountries() {
 
+        requests.mark();
         Countries countries = new Countries();
         List<String> countryList = Arrays.asList("United Kingdom", "Canada", "New Zealand", "Vietnam", "Sudan");
         countries.setCountries(countryList);
@@ -43,6 +52,7 @@ public class CountryResource {
     @Path("/add")
     public List<CountryCurrencyCode> postCountries(Countries countries) {
 
+        requests.mark();
         List<Pair<String, String>> result = countryService.getCurrencies(countries.getCountries());
         result.forEach(r -> System.out.println("country: " + r.getValue0() + " currency code: " + r.getValue1()));
 

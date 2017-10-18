@@ -1,3 +1,5 @@
 cacheScheduleConfiguration:
   delay: 5
   period: 5
+
+metrics_enabled: true

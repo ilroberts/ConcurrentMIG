@@ -16,6 +16,8 @@
     <orderEntry type="library" name="Gradle: org.postgresql:postgresql:42.1.4" level="project" />
     <orderEntry type="library" name="Gradle: org.jooq:jooq:3.9.5" level="project" />
     <orderEntry type="library" name="Gradle: com.zaxxer:HikariCP:2.7.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.mtakaki:dropwizard-circuitbreaker:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: io.dropwizard.metrics:metrics-core:3.2.5" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-util:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-jackson:1.2.0" level="project" />
@@ -27,7 +29,6 @@
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-servlets:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-jetty:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard:dropwizard-lifecycle:1.2.0" level="project" />
-    <orderEntry type="library" name="Gradle: io.dropwizard.metrics:metrics-core:3.2.5" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard.metrics:metrics-jvm:3.2.5" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard.metrics:metrics-servlets:3.2.5" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard.metrics:metrics-healthchecks:3.2.5" level="project" />
@@ -53,7 +54,6 @@
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-validator:5.4.1.Final" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish:javax.el:3.0.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.6" level="project" />
     <orderEntry type="library" name="Gradle: io.dropwizard.metrics:metrics-logback:3.2.5" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:jul-to-slf4j:1.7.25" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-core:1.2.3" level="project" />
@@ -106,6 +106,7 @@
     <orderEntry type="library" name="Gradle: com.google.j2objc:j2objc-annotations:1.1" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.6" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet-core:2.25.1" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.hk2:hk2-locator:2.5.0-b32" level="project" />
     <orderEntry type="library" name="Gradle: org.glassfish.jersey.core:jersey-client:2.25.1" level="project" />

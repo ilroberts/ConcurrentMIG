@@ -1,13 +1,15 @@
 package com.kainos;
 
+import com.codahale.metrics.ConsoleReporter;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.kainos.config.MIGConfiguration;
 import com.kainos.job.CacheManager;
-import com.kainos.job.CacheManagerImpl;
 import com.kainos.resource.CountryResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class MIGApplication extends Application<MIGConfiguration> {
@@ -32,7 +34,12 @@ public class MIGApplication extends Application<MIGConfiguration> {
     @Override
     public void run(MIGConfiguration configuration, Environment environment) {
 
-        environment.jersey().register(new CountryResource());
+        if (configuration.metricsEnabled()) {
+            final ConsoleReporter consoleReporter = ConsoleReporter.forRegistry(environment.metrics()).build();
+            consoleReporter.start(30, TimeUnit.SECONDS);
+        }
+
+        environment.jersey().register(new CountryResource(environment.metrics()));
         environment.lifecycle().manage(guiceBundle.getInjector().getInstance(CacheManager.class));
     }
 }

@@ -44,6 +44,10 @@ dependencies {
     compile group: 'org.jooq', name: 'jooq', version: '3.10.0'
     // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
     compile group: 'com.zaxxer', name: 'HikariCP', version: '2.7.2'
+    // https://mvnrepository.com/artifact/com.github.mtakaki/dropwizard-circuitbreaker
+    compile group: 'com.github.mtakaki', name: 'dropwizard-circuitbreaker', version: '1.1.0'
+    // https://mvnrepository.com/artifact/io.dropwizard.metrics/metrics-core
+    compile group: 'io.dropwizard.metrics', name: 'metrics-core', version: '3.2.5'
 
     jooqRuntime 'postgresql:postgresql:9.1-901.jdbc4'
     compile 'org.jooq:jooq'
