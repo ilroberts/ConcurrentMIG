@@ -20,7 +20,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
 
     private String username = "postgres";
     private String password = "";
-    private String url = "jdbc:postgresql://localhost:32768/currencydb";
+    private String url = "jdbc:postgresql://localhost:32773/currencydb";
 
     public DatabaseManagerImpl() {
 

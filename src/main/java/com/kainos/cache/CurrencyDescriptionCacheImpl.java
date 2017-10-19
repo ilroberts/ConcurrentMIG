@@ -19,13 +19,7 @@ public class CurrencyDescriptionCacheImpl implements CurrencyDescriptionCache {
     }
 
     public Optional<String> get(String key) {
-
-        if(!cache.isPresent()) {
-            cache = databaseManager.getCodeDescriptions();
-            return Optional.empty();
-        }
-        Map<String, String> actualCache = cache.get();
-        return Optional.ofNullable(actualCache.get(key));
+        return cache.map(c -> c.get(key));
     }
 
     public void rebuild() {

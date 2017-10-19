@@ -42,13 +42,19 @@ public class CountryResource {
     @CircuitBreaker(name = "countries-get")
     public Countries getCountries() throws Exception {
 
-//        requests.mark();
-//        Countries countries = new Countries();
-//        List<String> countryList = Arrays.asList("United Kingdom", "Canada", "New Zealand", "Vietnam", "Sudan");
-//        countries.setCountries(countryList);
+        requests.mark();
+        Countries countries = new Countries();
+        List<String> countryList = Arrays.asList("United Kingdom", "Canada", "New Zealand", "Vietnam", "Sudan");
+        countries.setCountries(countryList);
+        return countries;
+    }
 
-        throw new Exception("broken!");
-        // yup return countries;
+    @GET
+    @Timed
+    @CircuitBreaker(name = "countries-broken")
+    @Path("/broken")
+    public Countries getBrokenCountries() throws Exception {
+        throw new Exception("broken call");
     }
 
     @POST
