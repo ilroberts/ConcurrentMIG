@@ -1,6 +1,8 @@
 package com.kainos;
 
-import com.codahale.metrics.ConsoleReporter;
+import com.codahale.metrics.JmxReporter;
+import com.github.mtakaki.dropwizard.circuitbreaker.jersey.CircuitBreakerBundle;
+import com.github.mtakaki.dropwizard.circuitbreaker.jersey.CircuitBreakerConfiguration;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.kainos.config.MIGConfiguration;
 import com.kainos.job.CacheManager;
@@ -8,8 +10,6 @@ import com.kainos.resource.CountryResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-
-import java.util.concurrent.TimeUnit;
 
 
 public class MIGApplication extends Application<MIGConfiguration> {
@@ -20,6 +20,14 @@ public class MIGApplication extends Application<MIGConfiguration> {
         new MIGApplication().run(args);
     }
 
+    private final CircuitBreakerBundle<MIGConfiguration> circuitBreakerBundle = new CircuitBreakerBundle<MIGConfiguration>() {
+        @Override
+        protected CircuitBreakerConfiguration getConfiguration(
+                final MIGConfiguration configuration) {
+            return configuration.getCircuitBreaker();
+        }
+    };
+
     @Override
     public void initialize(Bootstrap<MIGConfiguration> bootstrap) {
 
@@ -29,14 +37,16 @@ public class MIGApplication extends Application<MIGConfiguration> {
                 .build();
 
         bootstrap.addBundle(guiceBundle);
+        bootstrap.addBundle(this.circuitBreakerBundle);
     }
 
     @Override
     public void run(MIGConfiguration configuration, Environment environment) {
 
         if (configuration.metricsEnabled()) {
-            final ConsoleReporter consoleReporter = ConsoleReporter.forRegistry(environment.metrics()).build();
-            consoleReporter.start(30, TimeUnit.SECONDS);
+
+            final JmxReporter reporter = JmxReporter.forRegistry(environment.metrics()).build();
+            reporter.start();
         }
 
         environment.jersey().register(new CountryResource(environment.metrics()));

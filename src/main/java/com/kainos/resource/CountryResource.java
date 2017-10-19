@@ -3,6 +3,7 @@ package com.kainos.resource;
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.annotation.Timed;
+import com.github.mtakaki.dropwizard.circuitbreaker.jersey.CircuitBreaker;
 import com.kainos.api.Countries;
 import com.kainos.api.CountryCurrencyCode;
 import com.kainos.cache.CurrencyDescriptionCache;
@@ -38,18 +39,22 @@ public class CountryResource {
 
     @GET
     @Timed
-    public Countries getCountries() {
+    @CircuitBreaker(name = "countries-get")
+    public Countries getCountries() throws Exception {
 
-        requests.mark();
-        Countries countries = new Countries();
-        List<String> countryList = Arrays.asList("United Kingdom", "Canada", "New Zealand", "Vietnam", "Sudan");
-        countries.setCountries(countryList);
-        return countries;
+//        requests.mark();
+//        Countries countries = new Countries();
+//        List<String> countryList = Arrays.asList("United Kingdom", "Canada", "New Zealand", "Vietnam", "Sudan");
+//        countries.setCountries(countryList);
+
+        throw new Exception("broken!");
+        // yup return countries;
     }
 
     @POST
     @Timed
     @Path("/add")
+    @CircuitBreaker(name = "countries-post")
     public List<CountryCurrencyCode> postCountries(Countries countries) {
 
         requests.mark();

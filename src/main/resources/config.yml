@@ -3,3 +3,9 @@ cacheScheduleConfiguration:
   period: 5
 
 metrics_enabled: true
+
+circuitBreaker:
+  threshold: 0.5
+  rateType: ONE_MINUTE
+  customThresholds:
+    com.mtakaki.testcb.TestResource.get.circuitBreaker: 0.2
