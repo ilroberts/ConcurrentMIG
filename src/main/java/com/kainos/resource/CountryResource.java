@@ -7,7 +7,6 @@ import com.github.mtakaki.dropwizard.circuitbreaker.jersey.CircuitBreaker;
 import com.kainos.api.Countries;
 import com.kainos.api.CountryCurrencyCode;
 import com.kainos.cache.CurrencyDescriptionCache;
-import com.kainos.job.CacheManagerImpl;
 import com.kainos.service.CountryService;
 import org.javatuples.Pair;
 

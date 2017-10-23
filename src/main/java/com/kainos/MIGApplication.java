@@ -44,7 +44,6 @@ public class MIGApplication extends Application<MIGConfiguration> {
     public void run(MIGConfiguration configuration, Environment environment) {
 
         if (configuration.metricsEnabled()) {
-
             final JmxReporter reporter = JmxReporter.forRegistry(environment.metrics()).build();
             reporter.start();
         }
