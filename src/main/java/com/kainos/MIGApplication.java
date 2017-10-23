@@ -48,7 +48,7 @@ public class MIGApplication extends Application<MIGConfiguration> {
             reporter.start();
         }
 
-        environment.jersey().register(new CountryResource(environment.metrics()));
+        environment.jersey().register(guiceBundle.getInjector().getInstance(CountryResource.class));
         environment.lifecycle().manage(guiceBundle.getInjector().getInstance(CacheManager.class));
     }
 }
