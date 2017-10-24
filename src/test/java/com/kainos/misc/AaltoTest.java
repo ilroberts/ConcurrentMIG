@@ -25,7 +25,7 @@ public class AaltoTest  {
     @Test
     public void testAalto() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
 
-        File xmlFile = new File("/src/test/resources/mig-patient-trace.xml");
+        File xmlFile = new File("./src/test/resources/mig-patient-trace.xml");
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(xmlFile);
