@@ -5,23 +5,23 @@ import com.kainos.config.CacheScheduleConfiguration;
 import io.dropwizard.lifecycle.Managed;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-@Singleton
 public final class CacheManagerImpl implements Managed, CacheManager {
 
     @Inject
     private CurrencyDescriptionCache cache;
 
-    @Inject
-    private CacheScheduleConfiguration configuration;
-
     private ScheduledExecutorService scheduledExecutorService;
     private ScheduledFuture scheduledFuture;
+
+    @Inject
+    public CacheManagerImpl(CacheScheduleConfiguration c) {
+        c.getDelay();
+    }
 
     @Override
     public void start() throws Exception {

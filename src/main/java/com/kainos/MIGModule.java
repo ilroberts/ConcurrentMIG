@@ -5,6 +5,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.kainos.cache.CurrencyDescriptionCache;
 import com.kainos.cache.CurrencyDescriptionCacheImpl;
+import com.kainos.config.CacheScheduleConfiguration;
+import com.kainos.config.MIGConfiguration;
 import com.kainos.db.DatabaseManager;
 import com.kainos.db.DatabaseManagerImpl;
 import com.kainos.job.CacheManager;
@@ -31,5 +33,10 @@ public class MIGModule extends AbstractModule {
     @Provides
     public MetricRegistry providesMetrics(Environment e) {
         return e.metrics();
+    }
+
+    @Provides
+    public CacheScheduleConfiguration getCacheScheduleConfiguration(MIGConfiguration c) {
+        return c.getCacheScheduleConfiguration();
     }
 }
