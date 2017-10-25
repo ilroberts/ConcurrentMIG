@@ -3,6 +3,7 @@ package com.kainos.misc;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -23,6 +24,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PatientTest {
 
@@ -45,16 +47,52 @@ public class PatientTest {
     @Test
     public void testRetrievePeople() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 
-        String expression = "(/Envelope/Body/migResponse/serviceContent/ehrExtractResponsev2-0/content/structured/openHealthRecord/adminDomain/person/forenames)";
-        Stream<Node> nodeStream = getNodeStreamFromXpath(document, expression);
-        List<Person> people = nodeStream.map(this::getPersonFromNode).collect(Collectors.toList());
-        people.forEach(p -> System.out.println(p.getForename()));
-        assertEquals(12, people.size());
+        String expression = "(/Envelope/Body/migResponse/serviceContent/ehrExtractResponsev2-0/content/structured/openHealthRecord/adminDomain/person)";
+
+        Stream<Node> nodes = getNodeStreamFromXpath(document, expression);
+        Stream<Node> elementNodes = nodes.filter(n -> n.getNodeType() == Node.ELEMENT_NODE);
+        elementNodes.forEach(e -> {
+            Element element = (Element) e;
+
+            Optional<String> id = getTextFromChildElement(element, "q1:id");
+            System.out.println("id = " + id.orElse(""));
+
+            NodeList forenames = ((Element) e).getElementsByTagName("q1:forenames");
+            Element forenameElement = (Element) forenames.item(0);
+            NodeList textFNList = forenameElement.getChildNodes();
+
+            System.out.println("Forenames : " +
+                    ((Node)textFNList.item(0)).getNodeValue().trim());
+
+            NodeList surname = ((Element) e).getElementsByTagName("q1:surname");
+            Element surnameElement = (Element) surname.item(0);
+            NodeList textLNList = surnameElement.getChildNodes();
+
+            Optional<String> surnameText;
+            if(textLNList.getLength() == 0) {
+                surnameText = Optional.empty();
+            } else {
+                surnameText = Optional.of(textLNList.item(0).getNodeValue().trim());
+            }
+            System.out.println("surname = " + surnameText.orElse(""));
+        });
+
+        assertTrue(true);
     }
 
-    public Person getPersonFromNode(Node node) {
-        return new Person("", node.getFirstChild().getNodeValue(), "");
+    public Optional<String> getTextFromChildElement(Element parentElement, String tagName) {
+
+        Optional<String> result;
+        NodeList nodeList = parentElement.getElementsByTagName(tagName);
+        Element childElement = (Element) nodeList.item(0);
+        NodeList textList = childElement.getChildNodes();
+        if(textList.getLength() == 0) {
+            return Optional.empty();
+        } else {
+            return Optional.of(textList.item(0).getNodeValue().trim());
+        }
     }
+
 
     public Stream<Node> getNodeStreamFromXpath(Document document, String expression) throws XPathExpressionException {
 
